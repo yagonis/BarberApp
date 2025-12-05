@@ -30,7 +30,7 @@ export default function Header() {
         </nav>
 
         <aside>
-          <Notification />
+          {/* <Notification /> */}
 
           <Profile>
             <div>

@@ -32,6 +32,7 @@ export default function Dashboard() {
   const [selectedTime, setSelectedTime] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [reservedNames, setReservedNames] = useState({});
   const profile = useSelector(state => state.user.profile);
 
   const dateFormatted = useMemo(
@@ -53,6 +54,7 @@ export default function Dashboard() {
 
         return {
           time: `${hour}:00h`,
+          slotKey: `${format(date, 'yyyy-MM-dd')}-${hour}`,
           past: isBefore(compareDate, new Date()),
           appointment: response.data.find(
             a => parseISO(a.date).toString() === compareDate.toString()
@@ -100,6 +102,10 @@ export default function Dashboard() {
         provider_id: profile.id,
         date: appointmentDate.toISOString(),
       });
+
+      // Guarda o nome digitado localmente para exibição
+      const key = `${format(date, 'yyyy-MM-dd')}-${hour}`;
+      setReservedNames(prev => ({ ...prev, [key]: clientName }));
       
       // Atualiza a lista de agendamentos
       await loadSchedule();
@@ -129,6 +135,7 @@ export default function Dashboard() {
       return {
         time: `${hour}:00h`,
         hour,
+        slotKey: `${format(date, 'yyyy-MM-dd')}-${hour}`,
         past: isBefore(compareDate, new Date()),
         appointment: response.data.find(
           a => parseISO(a.date).toString() === compareDate.toString()
@@ -177,7 +184,7 @@ export default function Dashboard() {
               {time.time === '12:00h' 
                 ? 'Reservado para almoço' 
                 : time.appointment 
-                  ? time.appointment.user.name 
+                  ? (reservedNames[time.slotKey] || time.appointment.user.name)
                   : 'Em aberto'}
             </span>
             {time.appointment && !time.past && time.time !== '12:00h' && (
