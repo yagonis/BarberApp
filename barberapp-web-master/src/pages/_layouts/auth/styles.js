@@ -3,7 +3,7 @@ import { darken } from 'polished';
 
 export const Wrapper = styled.div`
   height: 100%;
-  background: linear-gradient(-90deg, #f4a460, #ff6347);
+  background: linear-gradient(180deg, #e6f7ff, #cfefff);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,7 +17,7 @@ export const Content = styled.div`
   h1 {
     font-size: 40px;
     margin-top: 15px;
-    color: #fff;
+    color: #699aeeff;
   }
 
   h3 {
@@ -68,10 +68,10 @@ export const Content = styled.div`
     }
 
     a {
-      color: #fff;
+      color: #699aee;
       margin-top: 15px;
       font-size: 16px;
-      opacity: 0.8;
+      opacity: 0.9;
 
       &:hover {
         opacity: 1;
