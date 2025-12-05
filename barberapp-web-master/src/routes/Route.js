@@ -11,15 +11,21 @@ import { store } from '~/store';
 export default function RouteWrapper({
   component: Component,
   isPrivate,
+  isAdmin,
   ...rest
 }) {
   const { signed } = store.getState().auth;
+  const { profile } = store.getState().user;
 
   if (!signed && isPrivate) {
     return <Redirect to="/" />;
   }
 
   if (signed && !isPrivate) {
+    return <Redirect to="/dashboard" />;
+  }
+
+  if (isAdmin && (!profile || !profile.admin)) {
     return <Redirect to="/dashboard" />;
   }
 
@@ -39,10 +45,12 @@ export default function RouteWrapper({
 
 RouteWrapper.propTypes = {
   isPrivate: PropTypes.bool,
+  isAdmin: PropTypes.bool,
   component: PropTypes.oneOfType([PropTypes.element, PropTypes.func])
     .isRequired,
 };
 
 RouteWrapper.defaultProps = {
   isPrivate: false,
+  isAdmin: false,
 };
