@@ -127,7 +127,8 @@ class AppointmentController {
             ],
         });
 
-        if (appointment.user_id !== req.userId) {
+        // Permite cancelar se quem estiver autenticado for o cliente OU o prestador
+        if (appointment.user_id !== req.userId && appointment.provider_id !== req.userId) {
             return res.status(401).json({
                 error: "You don't have permission to cancel this appointment",
             });

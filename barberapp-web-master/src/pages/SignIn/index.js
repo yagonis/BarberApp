@@ -26,7 +26,7 @@ export default function SignIn() {
   return (
     <>
       <img src={logo} alt="GoBarber" />
-      <h1>BarberApp</h1>
+      <h1>FullStackBarber</h1>
       <h3>Agenda Online</h3>
 
       <Form schema={schema} onSubmit={handleSubmit}>
