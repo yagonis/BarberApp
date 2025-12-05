@@ -66,6 +66,38 @@ export const Time = styled.li`
     }};
     font-style: ${props => props.isLunchTime ? 'italic' : 'normal'};
   }
+
+  /* Botão 'Desmarcar' */
+  button {
+    //margin-top: 12px;
+    float: right;
+    padding: 4px 6px;
+    border-radius: 12px;
+    border: 1px solid #ff6347;
+    background: transparent;
+    color: #ff6347;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.3px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+
+    &:hover {
+      background: #ff6347;
+      color: #fff;
+      box-shadow: 0 4px 10px rgba(255, 99, 71, 0.25);
+    }
+
+    &:active {
+      transform: translateY(1px);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+  }
 `;
 
 export const Modal = styled.div`

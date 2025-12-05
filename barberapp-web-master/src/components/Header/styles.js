@@ -24,9 +24,18 @@ export const Content = styled.div`
       border-right: 1px solid #eee;
     }
 
-    a {
+    a,
+    .wip {
+      margin-left: 20px;
       font-weight: bold;
       color: #333;
+      display: inline-block;
+    }
+
+    .wip {
+      color: #699aee;
+      cursor: default;
+      opacity: 0.95;
     }
   }
 
