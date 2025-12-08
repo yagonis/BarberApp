@@ -2,14 +2,11 @@
 import Sequelize from 'sequelize';
 import mongoose from 'mongoose';
 
-import User from '../app/models/User';
-import File from '../app/models/File';
-import Appointment from '../app/models/Appointment';
+import User from '../app/models/User.js';
+import File from '../app/models/File.js';
+import Appointment from '../app/models/Appointment.js';
 
-import DatabaseConfig from '../config/database';
-
-import app from '../src/app.js';
-export default app;
+import DatabaseConfig from '../config/database.js';
 
 const models = [User, File, Appointment];
 

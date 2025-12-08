@@ -10,7 +10,7 @@ import 'express-async-errors';
 import routes from './routes.js';
 import sentryConfig from './config/sentry.js';
 
-import './database.js'; // Caso seja necessário.
+import './database/index.js';
 
 class App {
   constructor() {

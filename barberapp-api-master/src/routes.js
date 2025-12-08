@@ -1,18 +1,18 @@
 /* eslint-disable no-unused-vars */
 import { Router } from 'express';
 import multer from 'multer';
-import multerConfig from './config/multer';
+import multerConfig from './config/multer.js';
 
-import UserController from './app/controllers/UserController';
-import ProviderController from './app/controllers/ProviderController';
-import SessionController from './app/controllers/SessionController';
-import FileController from './app/controllers/FileController';
-import AppointmentController from './app/controllers/AppointmentController';
-import ScheduleController from './app/controllers/ScheduleController';
-import NotificationController from './app/controllers/NotificationController';
-import AvailableController from './app/controllers/AvailableController';
+import UserController from './app/controllers/UserController.js';
+import ProviderController from './app/controllers/ProviderController.js';
+import SessionController from './app/controllers/SessionController.js';
+import FileController from './app/controllers/FileController.js';
+import AppointmentController from './app/controllers/AppointmentController.js';
+import ScheduleController from './app/controllers/ScheduleController.js';
+import NotificationController from './app/controllers/NotificationController.js';
+import AvailableController from './app/controllers/AvailableController.js';
 
-import authMiddleware from './app/middlewares/auth';
+import authMiddleware from './app/middlewares/auth.js';
 
 const routes = new Router();
 const upload = multer(multerConfig);

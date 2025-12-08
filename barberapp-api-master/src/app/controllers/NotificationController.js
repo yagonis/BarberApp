@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
-import Notification from '../schemas/Notification';
-import User from '../models/User';
+import Notification from '../schemas/Notification.js';
+import User from '../models/User.js';
 
 class NotificationController {
     async index(req, res) {

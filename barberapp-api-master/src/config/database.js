@@ -1,14 +1,17 @@
-require('dotenv/config');
+import 'dotenv/config';
 
-module.exports = {
+export default {
     dialect: 'postgres',
-    host: '127.0.0.1',
-    port: 5432,
+    host: process.env.DB_HOST || '127.0.0.1',
+    port: process.env.DB_PORT || 5432,
     username: process.env.DB_USER,
     password: process.env.DB_PASS,
     database: process.env.DB_NAME,
     dialectOptions: {
-        ssl: false,
+        ssl: process.env.NODE_ENV === 'production' ? {
+            require: true,
+            rejectUnauthorized: false
+        } : false,
     },
     pool: {
         max: 5,
