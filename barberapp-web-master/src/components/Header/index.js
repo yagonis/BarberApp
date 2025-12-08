@@ -19,6 +19,8 @@ export default function Header() {
     };
   }
 
+  //fazer um toast para quando clicar em histórico e planos
+
   return (
     <Container>
       <Content>
