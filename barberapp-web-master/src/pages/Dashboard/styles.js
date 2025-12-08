@@ -32,15 +32,153 @@ export const Time = styled.li`
   border-radius: 4px;
   background: #fff;
   opacity: ${props => (props.past ? 0.6 : 1)};
+  cursor: ${props => (props.isLunchTime || props.past ? 'not-allowed' : 'pointer')};
+  transition: transform 0.2s, box-shadow 0.2s;
+  
+  ${props => props.isLunchTime && `
+    background: #f5f5f5;
+    border-left: 3px solid #ffcc00;
+  `}
+  
+  ${props => !props.isLunchTime && !props.past && !props.appointment && `
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+  `}
+
   strong {
     display: block;
-    color: ${props => (props.available ? '#999' : '#ff6347')};
+    color: ${props => {
+      if (props.isLunchTime) return '#666';
+      return props.available ? '#999' : '#ff6347';
+    }};
     font-size: 20px;
     font-weight: normal;
   }
+  
   span {
     display: block;
     margin-top: 3px;
-    color: ${props => (props.available ? '#999' : '#666')};
+    color: ${props => {
+      if (props.isLunchTime) return '#999';
+      return props.available ? '#999' : '#666';
+    }};
+    font-style: ${props => props.isLunchTime ? 'italic' : 'normal'};
+  }
+
+  /* Botão 'Desmarcar' */
+  button {
+    //margin-top: 12px;
+    float: right;
+    padding: 4px 6px;
+    border-radius: 12px;
+    border: 1px solid #ff6347;
+    background: transparent;
+    color: #ff6347;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.3px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+
+    &:hover {
+      background: #ff6347;
+      color: #fff;
+      box-shadow: 0 4px 10px rgba(255, 99, 71, 0.25);
+    }
+
+    &:active {
+      transform: translateY(1px);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+  }
+`;
+
+export const Modal = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: ${props => (props.show ? 'flex' : 'none')};
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+`;
+
+export const ModalContent = styled.div`
+  background: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  
+  h2 {
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  p {
+    color: #666;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 16px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    
+    button {
+      background: #ff6347;
+      color: #fff;
+      border: 0;
+      border-radius: 4px;
+      padding: 12px 20px;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 10px;
+      
+      &:hover {
+        background: #ff4d2e;
+      }
+      
+      &:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+      }
+    }
+  }
+`;
+
+export const CloseButton = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.2s;
+  
+  &:hover {
+    background: #f5f5f5;
   }
 `;

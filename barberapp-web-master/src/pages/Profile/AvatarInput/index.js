@@ -1,11 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useField } from '@rocketseat/unform';
+import { useSelector } from 'react-redux';
 import api from '~/services/api';
 
 import { Container } from './styles';
 
 export default function AvatarInput() {
   const { defaultValue, registerField } = useField('avatar');
+  const profile = useSelector(state => state.user.profile);
 
   const [file, setFile] = useState(defaultValue && defaultValue.id);
   const [preview, setPreview] = useState(defaultValue && defaultValue.url);
@@ -40,10 +42,15 @@ export default function AvatarInput() {
       <label htmlFor="avatar">
         <img
           src={
-            preview || 'https://api.adorable.io/avatars/250/abott@adorable.png'
+            preview || `https://ui-avatars.com/api/?name=${encodeURIComponent((profile && profile.name) || 'User')}&background=699aee&color=fff&bold=true&size=250`
           }
-          alt="Avatar"
+          alt={(profile && profile.name) || 'Usuário'}
+          onError={e => {
+            e.target.onerror = null;
+            e.target.src = 'https://ui-avatars.com/api/?name=User&background=699aee&color=fff&bold=true&size=250';
+          }}
         />
+        <span className="caption">Alterar imagem</span>
 
         <input
           type="file"

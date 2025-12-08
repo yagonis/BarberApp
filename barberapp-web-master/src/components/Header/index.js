@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import Notification from '~/components/Notifications';
 
@@ -11,16 +12,25 @@ import { Container, Content, Profile } from './styles';
 export default function Header() {
   const profile = useSelector(state => state.user.profile);
 
+  function handleWip(label) {
+    return e => {
+      e.preventDefault();
+      toast.info(`${label}: Estamos trabalhando nisso`);
+    };
+  }
+
   return (
     <Container>
       <Content>
         <nav>
           <img src={logo} alt="GoBarber" />
           <Link to="/dashboard">DASHBOARD</Link>
+          <a href="#" onClick={handleWip('Histórico')}>HISTÓRICO</a>
+          <a href="#" onClick={handleWip('Planos')}>PLANOS</a>
         </nav>
 
         <aside>
-          <Notification />
+          {/* <Notification /> */}
 
           <Profile>
             <div>
@@ -30,9 +40,13 @@ export default function Header() {
             <img
               src={
                 (profile.avatar && profile.avatar.url) ||
-                `https://api.adorable.io/avatars/250/abott@adorable.png`
+                `https://ui-avatars.com/api/?name=${encodeURIComponent(profile.name || 'User')}&background=699aee&color=fff&bold=true&size=250`
               }
-              alt="Diego Fernandes"
+              alt={profile.name || 'Usuário'}
+              onError={e => {
+                e.target.onerror = null;
+                e.target.src = 'https://ui-avatars.com/api/?name=User&background=699aee&color=fff&bold=true&size=250';
+              }}
             />
           </Profile>
         </aside>
