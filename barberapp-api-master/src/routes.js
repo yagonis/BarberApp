@@ -17,6 +17,30 @@ import authMiddleware from './app/middlewares/auth.js';
 const routes = new Router();
 const upload = multer(multerConfig);
 
+// Health check route
+routes.get('/', (req, res) => {
+  return res.json({ 
+    message: 'BarberApp API is running 🚀',
+    version: '1.0.0',
+    status: 'active',
+    timestamp: new Date().toISOString(),
+    endpoints: {
+      auth: {
+        sessions: 'POST /sessions',
+        register: 'POST /users'
+      },
+      authenticated: {
+        users: 'PUT /users',
+        providers: 'GET /providers',
+        appointments: 'GET/POST/DELETE /appointments',
+        schedule: 'GET /schedule',
+        notifications: 'GET/PUT /notifications',
+        files: 'POST /files'
+      }
+    }
+  });
+});
+
 routes.post('/sessions', SessionController.store);
 routes.post('/users', UserController.store);
 
