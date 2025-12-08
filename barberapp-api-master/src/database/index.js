@@ -17,25 +17,50 @@ class Database {
     }
 
     init() {
-        this.connection = new Sequelize(DatabaseConfig);
+        try {
+            this.connection = new Sequelize(DatabaseConfig);
 
-        models
-            .map(model => model.init(this.connection))
-            .map(
-                model =>
-                    model.associate && model.associate(this.connection.models)
-            );
+            models
+                .map(model => model.init(this.connection))
+                .map(
+                    model =>
+                        model.associate && model.associate(this.connection.models)
+                );
+            
+            console.log('✅ PostgreSQL connected successfully');
+        } catch (error) {
+            console.warn('⚠️ PostgreSQL connection failed:', error.message);
+            console.warn('⚠️ Database features will be unavailable');
+        }
     }
 
     mongo() {
-        this.mongoConnection = mongoose.connect(
-            process.env.MONGO_URL,
-            {
-                useNewUrlParser: true,
-                useFindAndModify: true,
-                useUnifiedTopology: true,
+        try {
+            if (!process.env.MONGO_URL) {
+                console.warn('⚠️ MONGO_URL not configured');
+                return;
             }
-        );
+            
+            this.mongoConnection = mongoose.connect(
+                process.env.MONGO_URL,
+                {
+                    useNewUrlParser: true,
+                    useFindAndModify: true,
+                    useUnifiedTopology: true,
+                }
+            );
+            
+            mongoose.connection.on('connected', () => {
+                console.log('✅ MongoDB connected successfully');
+            });
+            
+            mongoose.connection.on('error', (err) => {
+                console.warn('⚠️ MongoDB connection error:', err.message);
+            });
+        } catch (error) {
+            console.warn('⚠️ MongoDB connection failed:', error.message);
+            console.warn('⚠️ Notification features will be unavailable');
+        }
     }
 }
 

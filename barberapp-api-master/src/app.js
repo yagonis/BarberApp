@@ -10,6 +10,7 @@ import 'express-async-errors';
 import routes from './routes.js';
 import sentryConfig from './config/sentry.js';
 
+// Database initialization - will log warnings if connection fails
 import './database/index.js';
 
 class App {
