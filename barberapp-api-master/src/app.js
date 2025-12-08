@@ -10,6 +10,8 @@ import 'express-async-errors';
 import routes from './routes';
 import sentryConfig from './config/sentry';
 
+cons port = process.env.PORT || 3003;
+
 import './database';
 
 class App {
