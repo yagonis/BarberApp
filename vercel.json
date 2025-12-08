@@ -2,19 +2,19 @@
   "version": 2,
   "builds": [
     {
-      "src": "barberapp-api-master/api/index.js",
+      "src": "api/mock.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
-      "src": "/(.*)",
-      "dest": "barberapp-api-master/api/index.js"
+      "src": "/api/(.*)",
+      "dest": "api/mock.js"
     }
   ],
   "headers": [
     {
-      "source": "/(.*)",
+      "source": "/api/(.*)",
       "headers": [
         { "key": "Access-Control-Allow-Credentials", "value": "true" },
         { "key": "Access-Control-Allow-Origin", "value": "*" },

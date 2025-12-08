@@ -1,0 +1,41 @@
+{
+  "sessions": {
+    "token": "mocked-jwt-token",
+    "user": {
+      "id": 1,
+      "name": "Mock User",
+      "email": "mockuser@example.com"
+    }
+  },
+  "users": [
+    {
+      "id": 1,
+      "name": "Mock User",
+      "email": "mockuser@example.com"
+    }
+  ],
+  "providers": [
+    {
+      "id": 1,
+      "name": "Mock Provider",
+      "email": "mockprovider@example.com"
+    }
+  ],
+  "appointments": [
+    {
+      "id": 1,
+      "date": "2025-12-08T10:00:00Z",
+      "provider": {
+        "id": 1,
+        "name": "Mock Provider"
+      }
+    }
+  ],
+  "notifications": [
+    {
+      "id": 1,
+      "content": "Mock notification",
+      "read": false
+    }
+  ]
+}
