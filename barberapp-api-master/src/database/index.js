@@ -8,6 +8,9 @@ import Appointment from '../app/models/Appointment';
 
 import DatabaseConfig from '../config/database';
 
+import app from '../src/app.js';
+export default app;
+
 const models = [User, File, Appointment];
 
 class Database {
