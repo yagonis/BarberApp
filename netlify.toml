@@ -5,6 +5,7 @@
 
 [build.environment]
   NODE_VERSION = "18"
+  NODE_OPTIONS = "--openssl-legacy-provider"
   CI = "false"
   REACT_APP_API_URL = "http://localhost:3001"
 
