@@ -1,0 +1,14 @@
+[build]
+  base = "barberapp-web-master"
+  command = "npm run build"
+  publish = "build"
+
+[build.environment]
+  NODE_VERSION = "18"
+  CI = "false"
+  REACT_APP_API_URL = "http://localhost:3001"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
