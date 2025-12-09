@@ -1,0 +1,61 @@
+services:
+  # Backend API
+  - type: web
+    name: barberapp-api
+    env: node
+    region: ohio
+    plan: free
+    buildCommand: cd barberapp-api-master && npm install
+    startCommand: cd barberapp-api-master && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: APP_URL
+        sync: false
+      - key: PORT
+        value: 3333
+      - key: DB_HOST
+        fromDatabase:
+          name: barberapp-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: barberapp-db
+          property: port
+      - key: DB_USER
+        fromDatabase:
+          name: barberapp-db
+          property: user
+      - key: DB_PASS
+        fromDatabase:
+          name: barberapp-db
+          property: password
+      - key: DB_NAME
+        fromDatabase:
+          name: barberapp-db
+          property: database
+      - key: MONGO_URL
+        sync: false
+      - key: APP_SECRET
+        generateValue: true
+      - key: MAIL_HOST
+        sync: false
+      - key: MAIL_PORT
+        sync: false
+      - key: MAIL_USER
+        sync: false
+      - key: MAIL_PASS
+        sync: false
+      - key: REDIS_HOST
+        sync: false
+      - key: REDIS_PORT
+        value: 6379
+      - key: SENTRY_DSN
+        sync: false
+
+  # PostgreSQL Database
+databases:
+  - name: barberapp-db
+    plan: free
+    databaseName: barberapp
+    user: barberapp
